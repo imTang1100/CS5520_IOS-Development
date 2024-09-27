@@ -8,10 +8,58 @@
 import UIKit
 
 class ShowProfileController: UIViewController {
+    
+    //MARK: creating instance
+    let showProfile = ShowProfileView()
+    
+    
+    //MARK: patch the view of the controller
+    override func loadView(){
+        view = showProfile
+    }
+    
+    //MARK: message and mood from the first screen...
+    var receivedPackage: ViewController.Package = ViewController.Package() // The first screen can set this variable...
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // setting the Label's texts
+        if let unwrapperMessage = receivedPackage.name{
+            if !unwrapperMessage.isEmpty{
+                showProfile.userName.text = "Name: \(unwrapperMessage)"
+            }
+        }
+        
+        if let unwrapperEmail = receivedPackage.email{
+            if !unwrapperEmail.isEmpty{
+                showProfile.userEmail.text = "Email: \(unwrapperEmail)"
+            }
+        }
+        
+        if let unwrapperPhone = receivedPackage.phone, let unwrappeType = receivedPackage.type{
+            if unwrapperPhone != 0 && !unwrappeType.isEmpty{
+                showProfile.userPhone.text = "Phone: \(unwrapperPhone) + (\(unwrappeType))"
+            }
+        }
+        
+        if let unwrapperAddress = receivedPackage.address{
+            if !unwrapperAddress.isEmpty{
+                showProfile.userAddress.text = "Address: \(unwrapperAddress)"
+            }
+        }
+        
+        if let unwrapperCity = receivedPackage.city{
+            if !unwrapperCity.isEmpty{
+                showProfile.userCity.text = "\(unwrapperCity)"
+            }
+        }
+        
+        if let unwrapperZIP = receivedPackage.zip{
+            if unwrapperZIP != 0 {
+                showProfile.userZIP.text = "\(unwrapperZIP)"
+            }
+        }
         // Do any additional setup after loading the view.
     }
     

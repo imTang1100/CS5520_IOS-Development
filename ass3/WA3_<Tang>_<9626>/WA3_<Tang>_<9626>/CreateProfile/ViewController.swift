@@ -14,13 +14,19 @@ class ViewController: UIViewController {
     var selectedType = "Cell"
     
     public struct Package {
+        var name: String?
+        var email: String?
         var phone: Int?
+        var type: String?
         var address: String?
         var city: String?
         var zip: Int?
         
-        init(phone: Int? = nil, address: String? = nil, city: String? = nil, zip: Int? = nil) {
+        init(name: String? = nil, email: String? = nil, phone: Int? = nil, type: String? = nil, address: String? = nil, city: String? = nil, zip: Int? = nil) {
+            self.name = name
+            self.email = email
             self.phone = phone
+            self.type = type
             self.address = address
             self.city = city
             self.zip = zip
@@ -39,13 +45,50 @@ class ViewController: UIViewController {
         createProfile.numberTypePicker.delegate = self
         createProfile.numberTypePicker.dataSource = self
         
-        
-        
+        createProfile.showProfile.addTarget(self, action: #selector(onShowTapped), for: .touchUpInside)
         
         title = "Create Profile"
     }
-
+    
+    func validateZipCode(zip: String) -> Bool {
+        let zipString = zip
+        return zipString.count == 5
+    }
+    
+    @objc func onShowTapped() {
+        let name = createProfile.textFieldName.text
+        let email = createProfile.textFieldEmail.text
+        let phone = createProfile.phoneNumber.text
+        let address = createProfile.address.text
+        let city = createProfile.cityAndState.text
+        let zip = createProfile.zipCode.text
+        
+        if let unwrapperName = name, let unwrapperEmail = email, let unwrapperPhone = phone, let unwrapperAddress = address, let unwrapperCity = city,let unwrapperZip = zip{
+            // if the ZIP code is valid
+            if !unwrapperName .isEmpty && !unwrapperEmail.isEmpty && !unwrapperPhone.isEmpty && !unwrapperAddress.isEmpty && !unwrapperCity.isEmpty && validateZipCode(zip: unwrapperZip) {
+                let package = Package(name: unwrapperName, email: unwrapperEmail, phone: Int(unwrapperPhone), type: selectedType, address: unwrapperAddress, city: unwrapperCity, zip: Int(unwrapperZip))
+                
+                let showProfileController = ShowProfileController()
+                
+                showProfileController.receivedPackage = package
+                
+                navigationController?.pushViewController(showProfileController, animated: true)
+            } else {
+                showErrorAlert(message: "Please type the valid format!")
+            }
+        }
+    }
+    
+    func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        self.present(alert, animated: true)
+    }
 }
+
+
 
 extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource{
     //returns the number of columns/components in the Picker View...
