@@ -40,6 +40,8 @@ class ShowProfileController: UIViewController {
         if let unwrapperPhone = receivedPackage.phone, let unwrappeType = receivedPackage.type{
             if unwrapperPhone != 0 && !unwrappeType.isEmpty{
                 showProfile.userPhone.text = "Phone: \(unwrapperPhone) + (\(unwrappeType))"
+                showProfile.imageType.image = UIImage(named: receivedPackage.type?.lowercased() ?? "")
+
             }
         }
         
@@ -57,7 +59,7 @@ class ShowProfileController: UIViewController {
         
         if let unwrapperZIP = receivedPackage.zip{
             if unwrapperZIP != 0 {
-                showProfile.userZIP.text = "\(unwrapperZIP)"
+                showProfile.userZIP.text = "ZIP: \(unwrapperZIP)"
             }
         }
         // Do any additional setup after loading the view.

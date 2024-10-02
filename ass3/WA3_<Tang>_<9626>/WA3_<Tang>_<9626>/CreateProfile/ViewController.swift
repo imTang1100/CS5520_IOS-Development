@@ -74,7 +74,7 @@ class ViewController: UIViewController {
                 
                 navigationController?.pushViewController(showProfileController, animated: true)
             } else {
-                showErrorAlert(message: "Please type the valid format!")
+                showErrorAlert(message: "Please type in the valid format!")
             }
         }
     }

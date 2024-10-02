@@ -16,6 +16,9 @@ class ShowProfileView: UIView {
     var userCity: UILabel!
     var userZIP: UILabel!
     
+    var imageType: UIImageView!
+
+    
     //MARK: View initializer...
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,7 +33,10 @@ class ShowProfileView: UIView {
         setupUserCity()
         setupUserZIP()
         
+        setUpImage()
+        
         initConstraints()
+        
     }
 
     func setupUserName(){
@@ -75,28 +81,51 @@ class ShowProfileView: UIView {
         self.addSubview(userZIP)
     }
     
+    func setUpImage() {
+        imageType = UIImageView()
+        imageType.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(imageType)
+    }
+    
     //MARK: initializing the constraints...
     func initConstraints(){
         NSLayoutConstraint.activate([
+            // Constraints for userName
             userName.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 32),
-            userName.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            userName.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            userName.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
+            // Constraints for userEmail
             userEmail.topAnchor.constraint(equalTo: userName.bottomAnchor, constant: 16),
-            userEmail.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            userEmail.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            userEmail.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
+            // Constraints for userPhone
             userPhone.topAnchor.constraint(equalTo: userEmail.bottomAnchor, constant: 16),
-            userPhone.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            userPhone.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            userPhone.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
+            // Constraints for userAddress
             userAddress.topAnchor.constraint(equalTo: userPhone.bottomAnchor, constant: 16),
-            userAddress.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            userAddress.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            userAddress.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
+            // Constraints for userCity
             userCity.topAnchor.constraint(equalTo: userAddress.bottomAnchor, constant: 16),
-            userCity.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            userCity.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            userCity.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
+            // Constraints for userZIP
             userZIP.topAnchor.constraint(equalTo: userCity.bottomAnchor, constant: 16),
-            userZIP.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            userZIP.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            userZIP.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            
+            // Constraints for imageType, center-aligned horizontally
+            imageType.topAnchor.constraint(equalTo: userZIP.bottomAnchor, constant: 32),
+            imageType.centerXAnchor.constraint(equalTo: self.centerXAnchor),
         ])
     }
+
     
     
     required init?(coder: NSCoder) {

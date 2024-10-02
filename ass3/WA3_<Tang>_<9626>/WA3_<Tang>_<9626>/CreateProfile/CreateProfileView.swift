@@ -47,43 +47,54 @@ class CreateProfileView: UIView {
     
     func initConstraints(){
         NSLayoutConstraint.activate([
+            // Leading and trailing anchors for textFieldName with 16 points margin
             textFieldName.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 32),
-            textFieldName.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            textFieldName.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
+            textFieldName.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            textFieldName.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
+            // Repeat for textFieldEmail
             textFieldEmail.topAnchor.constraint(equalTo: textFieldName.bottomAnchor, constant: 16),
-            textFieldEmail.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            textFieldEmail.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
+            textFieldEmail.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            textFieldEmail.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
+            // Constraints for addPhone
             addPhone.topAnchor.constraint(equalTo: textFieldEmail.bottomAnchor, constant: 16),
-            addPhone.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            
+            addPhone.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+
+            // Constraints for selectType
             selectType.topAnchor.constraint(equalTo: addPhone.bottomAnchor, constant: 16),
-            selectType.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            
+            selectType.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+
             numberTypePicker.topAnchor.constraint(equalTo: selectType.bottomAnchor, constant: -30),
-            numberTypePicker.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            
+            numberTypePicker.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            numberTypePicker.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+
             phoneNumber.topAnchor.constraint(equalTo: numberTypePicker.bottomAnchor, constant: 16),
-            phoneNumber.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            
+            phoneNumber.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            phoneNumber.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+
             address.topAnchor.constraint(equalTo: phoneNumber.bottomAnchor, constant: 16),
-            address.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            
+            address.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            address.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+
             cityAndState.topAnchor.constraint(equalTo: address.bottomAnchor, constant: 16),
-            cityAndState.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            
+            cityAndState.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            cityAndState.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+
             zipCode.topAnchor.constraint(equalTo: cityAndState.bottomAnchor, constant: 16),
-            zipCode.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            
+            zipCode.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            zipCode.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+
             showProfile.topAnchor.constraint(equalTo: zipCode.bottomAnchor, constant: 16),
-            showProfile.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            showProfile.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            showProfile.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
         ])
-    } 
-    
+    }
+
     func setUpTextFieldName() {
         textFieldName = UITextField()
         textFieldName.placeholder = "Name"
+        textFieldName.borderStyle = .roundedRect
         textFieldName.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(textFieldName)
     }
@@ -91,6 +102,7 @@ class CreateProfileView: UIView {
     func setUpTextFieldEmail() {
         textFieldEmail = UITextField()
         textFieldEmail.placeholder = "Email"
+        textFieldEmail.borderStyle = .roundedRect
         textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
         textFieldEmail.keyboardType = .emailAddress
         textFieldEmail.autocapitalizationType = .none  // Disable auto-capitalization
@@ -124,6 +136,7 @@ class CreateProfileView: UIView {
     func setUpPhoneNum() {
         phoneNumber = UITextField()
         phoneNumber.placeholder = "Phone Number"
+        phoneNumber.borderStyle = .roundedRect
         phoneNumber.translatesAutoresizingMaskIntoConstraints = false
         phoneNumber.keyboardType = .phonePad
         self.addSubview(phoneNumber)
@@ -132,6 +145,7 @@ class CreateProfileView: UIView {
     func setUpAddress() {
         address = UITextField()
         address.placeholder = "Address"
+        address.borderStyle = .roundedRect
         address.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(address)
     }
@@ -139,6 +153,7 @@ class CreateProfileView: UIView {
     func setUpCityState() {
         cityAndState = UITextField()
         cityAndState.placeholder = "City, State"
+        cityAndState.borderStyle = .roundedRect
         cityAndState.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(cityAndState)
     }
@@ -147,6 +162,7 @@ class CreateProfileView: UIView {
         zipCode = UITextField()
         zipCode.placeholder = "ZIP"
         zipCode.keyboardType = .numberPad
+        zipCode.borderStyle = .roundedRect 
         zipCode.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(zipCode)
     }
