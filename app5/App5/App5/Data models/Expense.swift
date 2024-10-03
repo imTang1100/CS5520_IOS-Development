@@ -17,5 +17,4 @@ struct Expense{
         self.amount = amount
         self.type = type
     }
-    
 }

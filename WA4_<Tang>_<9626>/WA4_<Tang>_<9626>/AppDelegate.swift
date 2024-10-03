@@ -1,14 +1,15 @@
 //
 //  AppDelegate.swift
-//  App5
+//  WA4_<Tang>_<9626>
 //
-//  Created by evan tang on 9/30/24.
+//  Created by evan tang on 10/2/24.
 //
 
 import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     let firstScreen = FirstScreenView()
-    
+     
     var expenses = [Expense]()
     
     //MARK: predefined types of expenses...
