@@ -55,16 +55,60 @@ class AddContactViewController: UIViewController {
                 return
             }
         }
-
         
-        let newContact = Contact(name: name, email: email, phoneNumber: Int, phoneType: String, address: String, cityState: String, zipCode: Int)
+        var phoneNumber:String?
+        if let phoneNumberText = addContactScreen.phoneNumber.text{
+            if !phoneNumberText.isEmpty{
+                phoneNumber = phoneNumberText
+            }else{
+                //alert the user that it's not a valid input...
+                return
+            }
+        }
+        
+        var address: String?
+        if let addressText = addContactScreen.address.text{
+            if !addressText.isEmpty{
+                address = addressText
+            }else{
+                //alert the user that it's not a valid input...
+                return
+            }
+        }
+
+        var city: String?
+        if let cityText = addContactScreen.cityAndState.text{
+            if !cityText.isEmpty{
+                city = cityText
+            }else{
+                //alert the user that it's not a valid input...
+                return
+            }
+        }
+        
+        var zip: String?
+        if let zipCode = addContactScreen.zipCode.text{
+            if validateZipCode(zip: zipCode){
+                zip = zipCode
+            }else{
+                //alert the user that it's not a valid input...
+                return
+            }
+        }
+        
+        
+        let newContact = Contact(name: name, email: email, phoneNumber: phoneNumber, phoneType: selectedType, address: address, cityState: city, zipCode: zip)
     
         delegate.delegateOnAddContact(contact: newContact)
         navigationController?.popViewController(animated: true)
     }
     
     
-
+    func validateZipCode(zip: String) -> Bool {
+        let zipString = zip
+        return zipString.count == 5
+    }
+    
     /*
     // MARK: - Navigation
 

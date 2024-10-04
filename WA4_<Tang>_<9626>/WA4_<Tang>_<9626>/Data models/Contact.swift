@@ -10,15 +10,15 @@ import Foundation
 struct Contact{
     var name: String?
     var email: String?
-    var phoneNumber: Int?
+    var phoneNumber: String?
     var phoneType: String?
     var address: String?
     var cityState: String?
-    var zipCode: Int?
+    var zipCode: String?
     
     
     
-    init(name: String? = nil, email: String? = nil, phoneNumber: Int? = nil, phoneType: String? = nil, address: String? = nil, cityState: String? = nil, zipCode: Int? = nil) {
+    init(name: String? = nil, email: String? = nil, phoneNumber: String? = nil, phoneType: String? = nil, address: String? = nil, cityState: String? = nil, zipCode: String? = nil) {
         self.name = name
         self.email = email
         self.phoneNumber = phoneNumber
