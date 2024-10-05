@@ -16,6 +16,10 @@ class ViewController: UIViewController {
     //MARK: predefined types of expenses...
     let types = ["Cell", "Work", "Home"]
     
+    override func loadView() {
+        view = firstScrren
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "My Contacts"
@@ -27,6 +31,17 @@ class ViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add, target: self, action: #selector(onAddBarButtonTapped)
         )
+        
+        //MARK: recognizing the taps on the app screen, not the keyboard...
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap))
+        tapRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapRecognizer)
+    }
+    
+    //MARK: Hide Keyboard...
+    @objc func hideKeyboardOnTap(){
+        //MARK: removing the keyboard from screen...
+        view.endEditing(true)
     }
         
     @objc func onAddBarButtonTapped(){
@@ -63,7 +78,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     //MARK: deal with user interaction with a cell...
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(self.contacts[indexPath.row])
+        let addDetailController = DetailScreenViewController()
+        addDetailController.delegate = self
+        addDetailController.contact = self.contacts[indexPath.row]
+        navigationController?.pushViewController(addDetailController, animated: true)
     }
+    
     
 }
 
