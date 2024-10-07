@@ -127,9 +127,13 @@ class AddContactView: UIView {
             titleAddContact.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             
             textFieldName.topAnchor.constraint(equalTo: titleAddContact.bottomAnchor, constant: 16),
+            textFieldName.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            textFieldName.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             textFieldName.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
              
             textFieldEmail.topAnchor.constraint(equalTo: textFieldName.bottomAnchor, constant: 16),
+            textFieldEmail.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            textFieldEmail.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             textFieldEmail.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             
             titleAddPhone.topAnchor.constraint(equalTo: textFieldEmail.bottomAnchor, constant: 16),
@@ -139,16 +143,25 @@ class AddContactView: UIView {
             pickerType.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             
             phoneNumber.topAnchor.constraint(equalTo: pickerType.bottomAnchor, constant: 16),
+            phoneNumber.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            phoneNumber.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             phoneNumber.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             
             address.topAnchor.constraint(equalTo: phoneNumber.bottomAnchor, constant: 16),
             address.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            address.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            address.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
         
             cityAndState.topAnchor.constraint(equalTo: address.bottomAnchor, constant: 16),
             cityAndState.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            cityAndState.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            cityAndState.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
             zipCode.topAnchor.constraint(equalTo: cityAndState.bottomAnchor, constant: 16),
             zipCode.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            zipCode.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            zipCode.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            
         ])
     }
     

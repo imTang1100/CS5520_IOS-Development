@@ -25,7 +25,7 @@ class AddContactViewController: UIViewController {
         
         //MARK: setting the add button to the navigation controller...
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add, target: self, action: #selector(onRightButtonTapped)
+            title: "Save", style: .plain, target: self, action: #selector(onRightButtonTapped)
         )
         
         addContactScreen.pickerType.dataSource = self
@@ -41,7 +41,7 @@ class AddContactViewController: UIViewController {
             if !nameText.isEmpty{
                 name = nameText
             }else{
-                //do your thing to alert user...
+                showErrorAlert(message: "You need a name")
                 return
             }
         }
@@ -51,17 +51,17 @@ class AddContactViewController: UIViewController {
             if !emailText.isEmpty{
                 email = emailText
             }else{
-                //alert the user that it's not a valid input...
+                showErrorAlert(message: "email is important!")
                 return
             }
         }
         
         var phoneNumber:String?
         if let phoneNumberText = addContactScreen.phoneNumber.text{
-            if !phoneNumberText.isEmpty{
+            if !phoneNumberText.isEmpty && (Int(phoneNumberText) != nil) {
                 phoneNumber = phoneNumberText
             }else{
-                //alert the user that it's not a valid input...
+                showErrorAlert(message: "No phone number no call")
                 return
             }
         }
@@ -71,7 +71,7 @@ class AddContactViewController: UIViewController {
             if !addressText.isEmpty{
                 address = addressText
             }else{
-                //alert the user that it's not a valid input...
+                showErrorAlert(message: "You need an address")
                 return
             }
         }
@@ -81,7 +81,7 @@ class AddContactViewController: UIViewController {
             if !cityText.isEmpty{
                 city = cityText
             }else{
-                //alert the user that it's not a valid input...
+                showErrorAlert(message: "Ask where they are based!")
                 return
             }
         }
@@ -91,7 +91,7 @@ class AddContactViewController: UIViewController {
             if validateZipCode(zip: zipCode){
                 zip = zipCode
             }else{
-                //alert the user that it's not a valid input...
+                showErrorAlert(message: "zip Code, an valid zip code!")
                 return
             }
         }
@@ -109,6 +109,13 @@ class AddContactViewController: UIViewController {
         return zipString.count == 5
     }
     
+    func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        self.present(alert, animated: true)
+    }
     /*
     // MARK: - Navigation
 

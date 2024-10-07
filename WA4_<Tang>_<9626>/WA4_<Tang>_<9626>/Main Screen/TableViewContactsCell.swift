@@ -29,6 +29,9 @@ class TableViewContactsCell: UITableViewCell {
     
     func setupWrapperCellView(){
         wrapperCellView = UITableViewCell()
+        wrapperCellView.layer.borderColor = UIColor.red.cgColor
+        wrapperCellView.layer.borderWidth = 1
+        wrapperCellView.layer.cornerRadius = 5
         wrapperCellView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(wrapperCellView)
     }
@@ -82,5 +85,5 @@ class TableViewContactsCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+ 
 }

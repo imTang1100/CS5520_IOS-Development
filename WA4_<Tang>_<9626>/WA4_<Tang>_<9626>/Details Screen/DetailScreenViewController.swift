@@ -20,15 +20,16 @@ class DetailScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addDetailScreen.name.text = contact.name
-        addDetailScreen.email.text = contact.email
-        addDetailScreen.phone.text = "\(String(describing: contact.phoneNumber)) + (\(String(describing: contact.phoneType)))"
+
+        addDetailScreen.name.text = contact.name ?? "No Name"
+        addDetailScreen.email.text = contact.email ?? "No Email"
         
-        addDetailScreen.address.text = contact.address
-        addDetailScreen.cityState.text = contact.cityState
-        addDetailScreen.zip.text = contact.zipCode
-    
-        // Do any additional setup after loading the view.
+        // Handle phoneNumber and phoneType with default values if they are nil
+        addDetailScreen.phone.text = "\(contact.phoneNumber ?? "Unknown") (\(contact.phoneType ?? "Unknown"))"
+        
+        addDetailScreen.address.text = contact.address ?? "No Address"
+        addDetailScreen.cityState.text = contact.cityState ?? "No City/State"
+        addDetailScreen.zip.text = contact.zipCode != nil ? "\(contact.zipCode!)" : "No Zip Code"
     }
 
     /*
