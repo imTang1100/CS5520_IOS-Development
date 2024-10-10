@@ -40,6 +40,15 @@ class TableViewExpenseCell: UITableViewCell {
     
     func setupWrapperCellView(){
         wrapperCellView = UITableViewCell()
+        
+        //working with the shadows and colors...
+        wrapperCellView.backgroundColor = .white
+        wrapperCellView.layer.cornerRadius = 10.0
+        wrapperCellView.layer.shadowColor = UIColor.gray.cgColor
+        wrapperCellView.layer.shadowOffset = .zero
+        wrapperCellView.layer.shadowRadius = 6.0
+        wrapperCellView.layer.shadowOpacity = 0.7
+        
         wrapperCellView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(wrapperCellView)
     }
@@ -67,17 +76,20 @@ class TableViewExpenseCell: UITableViewCell {
             wrapperCellView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             wrapperCellView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             
-            labelTitle.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 4),
-            labelTitle.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 4),
-            labelTitle.heightAnchor.constraint(equalToConstant: 20),
+            labelTitle.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 2),
+            labelTitle.leadingAnchor.constraint(equalTo: imageReceipt.trailingAnchor, constant: 8),
+            labelTitle.heightAnchor.constraint(equalToConstant: 32),
+            labelTitle.widthAnchor.constraint(lessThanOrEqualTo: wrapperCellView.widthAnchor),
             
-            labelAmount.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 4),
+            labelAmount.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 2),
             labelAmount.leadingAnchor.constraint(equalTo: labelTitle.leadingAnchor),
-            labelAmount.heightAnchor.constraint(equalToConstant: 20),
+            labelAmount.heightAnchor.constraint(equalToConstant: 32),
+            labelAmount.widthAnchor.constraint(lessThanOrEqualTo: labelTitle.widthAnchor),
             
-            labelType.topAnchor.constraint(equalTo: labelAmount.bottomAnchor, constant: 4),
+            labelType.topAnchor.constraint(equalTo: labelAmount.bottomAnchor, constant: 2),
             labelType.leadingAnchor.constraint(equalTo: labelTitle.leadingAnchor),
-            labelType.heightAnchor.constraint(equalToConstant: 20),
+            labelType.heightAnchor.constraint(equalToConstant: 32),
+            labelType.widthAnchor.constraint(lessThanOrEqualTo: labelTitle.widthAnchor),
             
             imageReceipt.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 8),
             imageReceipt.centerYAnchor.constraint(equalTo: wrapperCellView.centerYAnchor),
@@ -85,7 +97,7 @@ class TableViewExpenseCell: UITableViewCell {
             imageReceipt.heightAnchor.constraint(equalTo: wrapperCellView.heightAnchor, constant: -20),
             imageReceipt.widthAnchor.constraint(equalTo: wrapperCellView.heightAnchor, constant: -20),
             
-            wrapperCellView.heightAnchor.constraint(equalToConstant: 76)
+            wrapperCellView.heightAnchor.constraint(equalToConstant: 104)
         ])
     }
     

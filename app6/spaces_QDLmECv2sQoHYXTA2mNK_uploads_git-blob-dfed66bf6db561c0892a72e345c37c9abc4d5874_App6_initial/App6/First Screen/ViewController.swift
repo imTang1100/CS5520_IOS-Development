@@ -29,6 +29,9 @@ class ViewController: UIViewController {
         firstScreen.tableViewExpense.delegate = self
         firstScreen.tableViewExpense.dataSource = self
                 
+        //MARK: manipulating TableView separator line...
+        firstScreen.tableViewExpense.separatorStyle = .none
+        
         //MARK: setting the add button to the navigation controller...
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add, target: self,
@@ -67,6 +70,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         }
         if let uwType = expenses[indexPath.row].type{
             cell.labelType.text = "Type: \(uwType)"
+        }
+        if let uwImage = expenses[indexPath.row].image{
+            cell.imageReceipt.image = uwImage
         }
         return cell
     }

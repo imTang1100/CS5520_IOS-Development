@@ -63,6 +63,7 @@ class AddExpenseView: UIView {
         buttonTakePhoto.contentHorizontalAlignment = .fill
         buttonTakePhoto.contentVerticalAlignment = .fill
         buttonTakePhoto.imageView?.contentMode = .scaleAspectFit
+        buttonTakePhoto.showsMenuAsPrimaryAction = true
         buttonTakePhoto.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(buttonTakePhoto)
     }
