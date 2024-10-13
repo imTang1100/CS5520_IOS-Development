@@ -52,6 +52,7 @@ class TableViewContactsCell: UITableViewCell {
         wrapperCellView.layer.shadowRadius = 6.0
         wrapperCellView.layer.shadowOpacity = 0.7
         
+        wrapperCellView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(wrapperCellView)
     }
     
@@ -78,20 +79,20 @@ class TableViewContactsCell: UITableViewCell {
             wrapperCellView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             wrapperCellView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             
-            labelName.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 4),
-            labelName.leadingAnchor.constraint(equalTo: imageReceipt.leadingAnchor, constant: 4),
-            labelName.heightAnchor.constraint(equalToConstant: 20),
+            labelName.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 2),
+            labelName.leadingAnchor.constraint(equalTo: imageReceipt.trailingAnchor, constant: 8),
+            labelName.heightAnchor.constraint(equalToConstant: 32),
             labelName.widthAnchor.constraint(lessThanOrEqualTo: wrapperCellView.widthAnchor),
             
-            labelEmail.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 4),
-            labelEmail.leadingAnchor.constraint(equalTo: labelName.leadingAnchor),
-            labelEmail.heightAnchor.constraint(equalToConstant: 20),
-            labelEmail.widthAnchor.constraint(lessThanOrEqualTo: wrapperCellView.widthAnchor),
+            labelEmail.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 2),
+            labelEmail.leadingAnchor.constraint(equalTo: imageReceipt.trailingAnchor, constant: 8),
+            labelEmail.heightAnchor.constraint(equalToConstant: 32),
+            labelEmail.widthAnchor.constraint(lessThanOrEqualTo: labelName.widthAnchor),
             
-            labelPhone.topAnchor.constraint(equalTo: labelEmail.bottomAnchor, constant: 4),
-            labelPhone.leadingAnchor.constraint(equalTo: labelName.leadingAnchor),
-            labelPhone.heightAnchor.constraint(equalToConstant: 20),
-            labelPhone.widthAnchor.constraint(lessThanOrEqualTo: wrapperCellView.widthAnchor),
+            labelPhone.topAnchor.constraint(equalTo: labelEmail.bottomAnchor, constant: 2),
+            labelPhone.leadingAnchor.constraint(equalTo: imageReceipt.trailingAnchor, constant: 8),
+            labelPhone.heightAnchor.constraint(equalToConstant: 32),
+            labelPhone.widthAnchor.constraint(lessThanOrEqualTo: labelName.widthAnchor),
             
             imageReceipt.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 8),
             imageReceipt.centerYAnchor.constraint(equalTo: wrapperCellView.centerYAnchor),
@@ -99,7 +100,7 @@ class TableViewContactsCell: UITableViewCell {
             imageReceipt.heightAnchor.constraint(equalTo: wrapperCellView.heightAnchor, constant: -20),
             imageReceipt.widthAnchor.constraint(equalTo: wrapperCellView.heightAnchor, constant: -20),
             
-            wrapperCellView.heightAnchor.constraint(equalToConstant: 76)
+            wrapperCellView.heightAnchor.constraint(equalToConstant: 104)
         ])
     }
     

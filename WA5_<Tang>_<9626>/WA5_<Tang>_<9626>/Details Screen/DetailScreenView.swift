@@ -9,6 +9,7 @@ import UIKit
 
 class DetailScreenView: UIView {
     
+    var photo: UIImageView!
     var name: UILabel!
     var email: UILabel!
     var phone: UILabel!
@@ -33,6 +34,15 @@ class DetailScreenView: UIView {
     }
     
     func setupUI() {
+        // Photo
+        photo = UIImageView()
+        photo.image = UIImage(systemName: "photo")
+        photo.contentMode = .scaleToFill
+        photo.clipsToBounds = true
+        photo.layer.cornerRadius = 10
+        photo.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(photo)
+        
         // Name
         name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -79,8 +89,14 @@ class DetailScreenView: UIView {
     
     func initConstraints(){
         NSLayoutConstraint.activate([
+            // Photo
+            photo.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 32),
+            photo.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            photo.widthAnchor.constraint(equalToConstant: 150),
+            photo.heightAnchor.constraint(equalToConstant: 150),
+            
             // Name
-            name.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 32),
+            name.topAnchor.constraint(equalTo: photo.bottomAnchor, constant: 16),
             name.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
             // Email

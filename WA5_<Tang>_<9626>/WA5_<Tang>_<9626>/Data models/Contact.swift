@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Contact{
     var name: String?
@@ -15,11 +16,12 @@ struct Contact{
     var address: String?
     var cityState: String?
     var zipCode: String?
+    var image: UIImage?
     
     
-    
-    init(name: String? = nil, email: String? = nil, phoneNumber: String? = nil, phoneType: String? = nil, address: String? = nil, cityState: String? = nil, zipCode: String? = nil) {
+    init(name: String? = nil, image: UIImage?, email: String? = nil, phoneNumber: String? = nil, phoneType: String? = nil, address: String? = nil, cityState: String? = nil, zipCode: String? = nil) {
         self.name = name
+        self.image = image
         self.email = email
         self.phoneNumber = phoneNumber
         self.phoneType = phoneType

@@ -49,13 +49,23 @@ class ViewController: UIViewController {
         let addContactController = AddContactViewController()
         addContactController.delegate = self
         navigationController?.pushViewController(addContactController, animated: true)
-    }
+    } 
         
     func delegateOnAddContact(contact: Contact){
         contacts.append(contact)
         firstScrren.tableViewContact.reloadData()
     }
-        // Do any additional setup after loading the view.
+    
+    func delegateOnEditContact(contact: Contact) {
+        if let index = contacts.firstIndex(where: { $0.name == contact.name }) {
+            contacts[index] = contact
+        }
+        firstScrren.tableViewContact.reloadData()
+    }
+    
+    func reloadData() {
+        firstScrren.tableViewContact.reloadData()
+    }
 
 }
 
@@ -73,6 +83,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         if let phone = contacts[indexPath.row].phoneNumber, let phoneType = contacts[indexPath.row].phoneType {
             cell.labelPhone.text = "\(phone) (\(phoneType))"
         }
+        if let uwImage = contacts[indexPath.row].image{
+            cell.imageReceipt.image = uwImage
+        }
         return cell
     }
     
@@ -82,9 +95,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         let addDetailController = DetailScreenViewController()
         addDetailController.delegate = self
         addDetailController.contact = self.contacts[indexPath.row]
+        addDetailController.conIndex = indexPath.row
         navigationController?.pushViewController(addDetailController, animated: true)
     }
-    
-    
 }
 

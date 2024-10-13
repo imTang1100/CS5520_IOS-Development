@@ -1,13 +1,14 @@
 //
-//  AddContactView.swift
-//  WA4_<Tang>_<9626>
+//  EditView.swift
+//  WA5_<Tang>_<9626>
 //
-//  Created by evan tang on 10/2/24.
+//  Created by evan tang on 10/12/24.
 //
+
 
 import UIKit
 
-class AddContactView: UIView {
+class EditView: UIView {
     
     var titleAddContact: UILabel!
     
@@ -24,6 +25,8 @@ class AddContactView: UIView {
     
     var buttonSelectType: UIButton!
     var buttonTakePhoto: UIButton!
+    
+    var buttonSave: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,6 +46,8 @@ class AddContactView: UIView {
         setupCityState()
         setupZip()
         
+        setupSave()
+        
         initConstraints()
     }
     
@@ -57,7 +62,7 @@ class AddContactView: UIView {
     func setupButtonTakePhoto() {
         buttonTakePhoto = UIButton(type: .system)
         buttonTakePhoto.setTitle("", for: .normal)
-        buttonTakePhoto.setImage(UIImage(systemName: "camera.fill"), for: .normal)
+        //buttonTakePhoto.setImage(UIImage(systemName: "camera.fill"), for: .normal)
         buttonTakePhoto.contentHorizontalAlignment = .fill
         buttonTakePhoto.contentVerticalAlignment = .fill
         buttonTakePhoto.imageView?.contentMode = .scaleAspectFit
@@ -137,6 +142,14 @@ class AddContactView: UIView {
         self.addSubview(zipCode)
     }
     
+    func setupSave() {
+        buttonSave = UIButton(type: .system)
+        buttonSave.setTitle("Save", for: .normal)
+        buttonSave.titleLabel?.font = UIFont.systemFont(ofSize: 24)
+        buttonSave.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(buttonSave)
+    } 
+    
     //MARK: initialize the constraints...
     func initConstraints(){
         NSLayoutConstraint.activate([
@@ -179,6 +192,8 @@ class AddContactView: UIView {
             zipCode.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             zipCode.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
+            buttonSave.topAnchor.constraint(equalTo: cityAndState.bottomAnchor, constant: 60),
+            buttonSave.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
         ])
     }
     

@@ -1,95 +1,41 @@
 //
-//  AddContactViewController.swift
-//  WA4_<Tang>_<9626>
+//  EditControllerViewController.swift
+//  WA5_<Tang>_<9626>
 //
-//  Created by evan tang on 10/2/24.
+//  Created by evan tang on 10/12/24.
 //
 
 import UIKit
 import PhotosUI
 
-class AddContactViewController: UIViewController {
-    
+class EditController: UIViewController {
     var delegate: ViewController!
+    var delegae2: DetailScreenViewController!
     var selectedType = "Cell"
-
+    var conIndex: Int!
+    
     //MARK: variable to store the picked Image...
     var pickedImage:UIImage?
     
-    //MARK: initializing the ADDExpenseView...
-    let addContactScreen = AddContactView()
+    let addContactScreen = EditView()
     
-    //MARK: set the current view to addExpenseScreen...
     override func loadView() {
         view = addContactScreen
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        title = "Add Contact"
         
-        //MARK: setting the add button to the navigation controller...
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "Save", style: .plain, target: self, action: #selector(onRightButtonTapped)
-        )
+        title = "Edit"
         
         addContactScreen.buttonTakePhoto.menu = getMenuImagePicker()
         addContactScreen.buttonSelectType.menu = getMenuTypes()
-
-        // Do any additional setup after loading the view.
+        
+        addContactScreen.buttonSave.addTarget(self, action: #selector(updateContact), for: .touchUpInside)
+            
     }
     
-    func getMenuImagePicker() -> UIMenu{
-        var menuItems = [
-            UIAction(title: "Camera",handler: {(_) in
-                self.pickUsingCamera()
-            }),
-            UIAction(title: "Gallery",handler: {(_) in
-                self.pickPhotoFromGallery()
-            })
-        ]
-        
-        return UIMenu(title: "Select source", children: menuItems)
-    }
-    
-    //MARK: take Photo using Camera...
-    func pickUsingCamera(){
-        let cameraController = UIImagePickerController()
-        cameraController.sourceType = .camera
-        cameraController.allowsEditing = true
-        cameraController.delegate = self
-        present(cameraController, animated: true)
-    }
-    
-    //MARK: pick Photo using Gallery...
-    func pickPhotoFromGallery(){
-        var configuration = PHPickerConfiguration()
-        configuration.filter = PHPickerFilter.any(of: [.images])
-        configuration.selectionLimit = 1
-        
-        let photoPicker = PHPickerViewController(configuration: configuration)
-        
-        photoPicker.delegate = self
-        present(photoPicker, animated: true, completion: nil)
-    }
-    
-    //MARK: menu for buttonSelectType setup...
-    func getMenuTypes() -> UIMenu{
-        var menuItems = [UIAction]()
-        
-        for type in Utilities.types{
-            let menuItem = UIAction(title: type,handler: {(_) in
-                                self.selectedType = type
-                                self.addContactScreen.buttonSelectType.setTitle(self.selectedType, for: .normal)
-                            })
-            menuItems.append(menuItem)
-        }
-        
-        return UIMenu(title: "Select type", children: menuItems)
-    }
-    
-    @objc func onRightButtonTapped(){
+    @objc func updateContact() {
         var name:String?
         if let nameText = addContactScreen.textFieldName.text{
             if !nameText.isEmpty{
@@ -99,6 +45,8 @@ class AddContactViewController: UIViewController {
                 return
             }
         }
+        
+        
         
         var email:String?
         if let emailText = addContactScreen.textFieldEmail.text{
@@ -152,11 +100,60 @@ class AddContactViewController: UIViewController {
         
         let newContact = Contact(name: name, image: pickedImage ?? (UIImage(systemName: "photo"))!, email: email, phoneNumber: phoneNumber, phoneType: selectedType, address: address, cityState: city, zipCode: zip)
 
-        delegate.delegateOnAddContact(contact: newContact)
+        self.delegate.contacts[conIndex] = newContact
+        self.delegae2.upDate()
+        self.delegate.reloadData()
         navigationController?.popViewController(animated: true)
     }
     
+    func getMenuImagePicker() -> UIMenu{
+        var menuItems = [
+            UIAction(title: "Camera",handler: {(_) in
+                self.pickUsingCamera()
+            }),
+            UIAction(title: "Gallery",handler: {(_) in
+                self.pickPhotoFromGallery()
+            })
+        ]
+        
+        return UIMenu(title: "Select source", children: menuItems)
+    }
     
+    //MARK: take Photo using Camera...
+    func pickUsingCamera(){
+        let cameraController = UIImagePickerController()
+        cameraController.sourceType = .camera
+        cameraController.allowsEditing = true
+        cameraController.delegate = self
+        present(cameraController, animated: true)
+    }
+    
+    //MARK: pick Photo using Gallery...
+    func pickPhotoFromGallery(){
+        var configuration = PHPickerConfiguration()
+        configuration.filter = PHPickerFilter.any(of: [.images])
+        configuration.selectionLimit = 1
+        
+        let photoPicker = PHPickerViewController(configuration: configuration)
+        
+        photoPicker.delegate = self
+        present(photoPicker, animated: true, completion: nil)
+    }
+    
+    //MARK: menu for buttonSelectType setup...
+    func getMenuTypes() -> UIMenu{
+        var menuItems = [UIAction]()
+        
+        for type in Utilities.types{
+            let menuItem = UIAction(title: type,handler: {(_) in
+                                self.selectedType = type
+                                self.addContactScreen.buttonSelectType.setTitle(self.selectedType, for: .normal)
+                            })
+            menuItems.append(menuItem)
+        }
+        
+        return UIMenu(title: "Select type", children: menuItems)
+    }
     func validateZipCode(zip: String) -> Bool {
         let zipString = zip
         return zipString.count == 5
@@ -169,20 +166,10 @@ class AddContactViewController: UIViewController {
         
         self.present(alert, animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 //MARK: adopting the required protocols...
-extension AddContactViewController: UIPickerViewDelegate, UIPickerViewDataSource{
+extension EditController: UIPickerViewDelegate, UIPickerViewDataSource{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         //MARK: we are using only one section...
         return 1
@@ -201,7 +188,7 @@ extension AddContactViewController: UIPickerViewDelegate, UIPickerViewDataSource
     }
 }
 
-extension AddContactViewController:PHPickerViewControllerDelegate{
+extension EditController:PHPickerViewControllerDelegate{
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         dismiss(animated: true)
         
@@ -227,7 +214,7 @@ extension AddContactViewController:PHPickerViewControllerDelegate{
     }
 }
 
-extension AddContactViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate{
+extension EditController: UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
         
