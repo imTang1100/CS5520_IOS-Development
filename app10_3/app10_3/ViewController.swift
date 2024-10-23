@@ -15,13 +15,11 @@ class ViewController: UIViewController {
     let mainScreen = MainScreenView()
     //MARK: list to display the contact names in the TableView...
     var contactNames = [String]()
+    let notificationCenter = NotificationCenter.default
     
     override func loadView() {
         view = mainScreen
     }
-    
-    
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +31,72 @@ class ViewController: UIViewController {
         
         //MARK: removing the separator line...
         
+        notificationCenter.addObserver(self, selector: #selector(notificationReceivedForEdit(notification:)), name:  .textFromScondScreen, object: nil)
+        
         getAllContacts()
         title = "Contacts API Testing"
         
         mainScreen.buttonAdd.addTarget(self, action: #selector(onButtonAddTapped), for: .touchUpInside)
     }
-
+    
+    @objc func notificationReceivedForEdit(notification: Notification) {
+        guard let data = notification.object as? [String], data.count == 2 else {return}
+        
+        let yes = data[0]
+        let name = data[1]
+        if yes == "true" {
+            self.deleteContact(name: name)
+        }
+                
+    }
+    
+    func deleteContact(name: String){
+        let parameters = ["name":name]
+        if let url = URL(string: APIConfigs.baseURL+"delete"){
+            AF.request(url, method:.get,
+                       parameters: ["name":name],
+                       encoding: URLEncoding.queryString)
+                .responseString(completionHandler: { response in
+                
+                //MARK: retrieving the status code...
+                let status = response.response?.statusCode
+                 
+                switch response.result{
+                case .success(let data):
+                    //MARK: there was no network error...
+                    
+                    //MARK: status code is Optional, so unwrapping it...
+                    if let uwStatusCode = status{
+                        switch uwStatusCode{
+                            case 200...299:
+                            //MARK: the request was valid 200-level...
+                                //MARK: show alert with details...
+                                self.getAllContacts()
+                                print("successful delete and say bye to your contact")
+                                break
+                    
+                            case 400...499:
+                            //MARK: the request was not valid 400-level...
+                                print(data)
+                                break
+                    
+                            default:
+                            //MARK: probably a 500-level error...
+                                print(data)
+                                break
+                    
+                        }
+                    }
+                    break
+                    
+                case .failure(let error):
+                    //MARK: there was a network error...
+                    print(error)
+                    break
+                }
+            })
+        }
+    }
     //MARK: on Add Contact button tapped...
 
     @objc func onButtonAddTapped(){
@@ -214,25 +272,22 @@ class ViewController: UIViewController {
             }
         }
     
+    
+    
     func showDetailsInAlert(data: String){
+    
         let parts = data.components(separatedBy: ",")
         print(parts)
+        let addDetailScreenView = DetailsScreenViewController()
         
         //MARK: trim the whitespaces from the strings, and show alert...
         let name = parts[0].trimmingCharacters(in: .whitespacesAndNewlines)
         let email = parts[1].trimmingCharacters(in: .whitespacesAndNewlines)
-        if let phone = Int(parts[2].trimmingCharacters(in: .whitespacesAndNewlines)){
-            //MARK: show alert...
-            let message = """
-                name: \(name)
-                email: \(email)
-                phone: \(phone)
-                """
-            let alert = UIAlertController(title: "Selected Contact", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            self.present(alert, animated: true)
-        }
+        let phone = Int(parts[2].trimmingCharacters(in: .whitespacesAndNewlines)) ?? 000
         
+        let detailContact = Contact(name: name, email: email, phone: phone)
+        addDetailScreenView.contact = detailContact
+        navigationController?.pushViewController(addDetailScreenView, animated: true)
     }
 }
 

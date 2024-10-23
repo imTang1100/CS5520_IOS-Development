@@ -19,6 +19,8 @@ class MainScreenView: UIView {
     var textFieldAddPhone:UITextField!
     var buttonAdd:UIButton!
     
+    var receiveInfo: UILabel!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
