@@ -16,17 +16,20 @@ class UserNoteView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .white
 
+        setTable()
         setUI()
         
         initConstraints()
     }
     
-    func setUI() {
+    func setTable() {
         tableViewNotes = UITableView()
-        tableViewNotes.register(NotesTableViewCell.self, forCellReuseIdentifier: "names")
         tableViewNotes.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(tableViewNotes)
-        
+        tableViewNotes.register(NotesTableViewCell.self, forCellReuseIdentifier: "text")
+    }
+    
+    func setUI() {
         textAddNote = UITextField()
         textAddNote.placeholder = "What's in your little mind?"
         textAddNote.borderStyle = .roundedRect
@@ -43,18 +46,18 @@ class UserNoteView: UIView {
     func initConstraints() {
         NSLayoutConstraint.activate([
             
-            tableViewNotes.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 32),
+            tableViewNotes.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 8),
             tableViewNotes.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 8),
             tableViewNotes.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -8),
             tableViewNotes.bottomAnchor.constraint(equalTo: textAddNote.topAnchor, constant: -8),
             
-            textAddNote.topAnchor.constraint(equalTo: tableViewNotes.topAnchor, constant: 32),
             textAddNote.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 8),
             textAddNote.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -8),
+            textAddNote.bottomAnchor.constraint(equalTo: addButton.topAnchor, constant: -8),
         
-            addButton.topAnchor.constraint(equalTo: textAddNote.bottomAnchor, constant: 16),
             addButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 8),
             addButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -8),
+            addButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -16)
         
         ])
     }

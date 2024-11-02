@@ -57,8 +57,6 @@ class ViewController: UIViewController {
                             let decoder = JSONDecoder()
                             do{
                                 let receiveData = try decoder.decode(LoginResponse.self, from: data)
-                                print(receiveData.auth)
-                                print(receiveData.token)
                                 self.getTheUserNotes(response: receiveData)
                             }catch{
                                 
@@ -86,13 +84,13 @@ class ViewController: UIViewController {
             })
         }
     }
-    
+
     func getTheUserNotes(response: LoginResponse) {
         let addNewScreen = UserNoteViewController()
         addNewScreen.loginResponse = response
         navigationController?.pushViewController(addNewScreen, animated: true)
     }
-    
+     
     func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegex)

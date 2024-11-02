@@ -22,7 +22,7 @@ class NotesTableViewCell: UITableViewCell {
     }
 
     func setupWrapperCellView(){
-        wrapperCellView = UITableViewCell()
+        wrapperCellView = UIView()
         
         //working with the shadows and colors...
         wrapperCellView.backgroundColor = .white
@@ -44,20 +44,16 @@ class NotesTableViewCell: UITableViewCell {
     
     func initConstraints(){
         NSLayoutConstraint.activate([
-            wrapperCellView.topAnchor.constraint(equalTo: self.topAnchor,constant: 4),
+            wrapperCellView.topAnchor.constraint(equalTo: self.topAnchor, constant: 4),
             wrapperCellView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             wrapperCellView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             wrapperCellView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -4),
             
             labelName.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 8),
             labelName.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 10),
-            labelName.heightAnchor.constraint(equalToConstant: 20),
-            labelName.widthAnchor.constraint(equalTo: wrapperCellView.widthAnchor),
-            
-            wrapperCellView.heightAnchor.constraint(equalToConstant: 36)
-            
+            labelName.trailingAnchor.constraint(equalTo: wrapperCellView.trailingAnchor, constant: -10),
+            labelName.bottomAnchor.constraint(equalTo: wrapperCellView.bottomAnchor, constant: -8)
         ])
-        
     }
 
     override func awakeFromNib() {
